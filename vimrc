@@ -148,7 +148,7 @@ let g:vim_markdown_new_list_item_indent = 2
 
 
 " ALE Linting Section
-let g:ale_fixers = {'javascript': ['prettier-eslint']}
+let g:ale_fixers = {'javascript': ['prettier_eslint']}
 let g:ale_linters = {'javascript': ['flow']}
 let g:ale_fix_on_save = 1
 let g:ale_lint_on_text_changed = 0
@@ -169,6 +169,8 @@ let g:javascript_plugin_flow = 1
 let g:javascript_plugin_jsdoc = 1
 let g:jsx_ext_required = 0
 
+" JS Syntanx
+let g:used_javascript_libs = 'underscore,react'
 
 " Support for github flavored markdown
 " via https://github.com/jtratner/vim-flavored-markdown
