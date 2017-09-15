@@ -15,7 +15,7 @@ set incsearch     " do incremental searching
 set laststatus=2  " Always display the status line
 set autowrite     " Automatically :write before running commands
 
-colorscheme vice
+" colorscheme vice
 
 set noshowmode
 
@@ -46,7 +46,7 @@ augroup vimrcEx
   " Set syntax highlighting for specific file types
   autocmd BufRead,BufNewFile Appraisals set filetype=ruby
   autocmd BufRead,BufNewFile *.md set filetype=markdown
-  autocmd BufRead,BufNewFile .{jscs,jshint,eslint}rc set filetype=json
+  autocmd BufRead,BufNewFile .{babel,jscs,jshint,eslint}rc set filetype=json
 augroup END
 
 " When the type of shell script is /bin/sh, assume a POSIX-compatible
@@ -131,6 +131,7 @@ hi GitGutterDelete ctermbg=235 ctermfg=245
 hi GitGutterChangeDelete ctermbg=235 ctermfg=245
 hi EndOfBuffer ctermfg=237 ctermbg=235
 
+"set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 set statusline=%=&P\ %f\ %m
 set fillchars=vert:\ ,stl:\ ,stlnc:\ 
 set laststatus=2
@@ -148,10 +149,32 @@ let g:vim_markdown_new_list_item_indent = 2
 
 
 " ALE Linting Section
-let g:ale_fixers = {'javascript': ['prettier_eslint']}
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 'never' 
+let g:ale_set_highlights = 0
+" disable the Ale HTML linters
+let g:ale_linters = {
+\   'html': [],
+\}
+let g:ale_fixers = {}
+let g:ale_fixers['javascript'] = [
+\ 'prettier', 'eslint'
+\]
 let g:ale_linters = {'javascript': ['flow']}
 let g:ale_fix_on_save = 1
-let g:ale_lint_on_text_changed = 0
+let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5 --no-semi'
+
+" so it's clear which paren I'm on and which is matched
+highlight MatchParen cterm=none ctermbg=none ctermfg=yellow
+
+"few nicer JS colours
+highlight xmlAttrib ctermfg=121
+highlight jsThis ctermfg=224
+highlight jsSuper ctermfg=13
+highlight jsFuncCall ctermfg=cyan
+highlight jsComment ctermfg=245 ctermbg=none
+highlight jsClassProperty ctermfg=14 cterm=bold
+
 highlight clear ALEErrorSign " otherwise uses error bg color (typically red)
 highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
 let g:ale_sign_error = '⚠' " could use emoji
@@ -163,6 +186,11 @@ let g:ale_echo_msg_format = '%linter% says %s'
 " Map keys to navigate between lines with errors and warnings.
 nnoremap <leader>an :ALENextWrap<cr>
 nnoremap <leader>ap :ALEPreviousWrap<cr>
+
+" Use Grip for Markdown Previews
+let vim_markdown_preview_github=1
+let vim_markdown_preview_browser='Google Chrome'
+"let vim_markdown_preview_temp_file=1 " remove rendered html file
 
 " Vim Javascript Config
 let g:javascript_plugin_flow = 1
