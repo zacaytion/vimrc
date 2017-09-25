@@ -50,6 +50,9 @@ Plug 'Quramy/tsuquyomi', { 'for': 'typescript' }
 Plug 'pangloss/vim-javascript'
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plug 'othree/jspc.vim'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'npm install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
 Plug '1995eaton/vim-better-javascript-completion'
 Plug 'mxw/vim-jsx'
 Plug 'moll/vim-node'
@@ -67,6 +70,7 @@ Plug 'cespare/vim-toml'
 Plug 'junegunn/vim-emoji'
 
 " Actual Plugs
+Plug 'itchyny/lightline.vim'
 Plug 'mhinz/vim-startify' " Fancy start screen. Lets you open empty buffers, multiple files, etc
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
